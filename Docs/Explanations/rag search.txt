@@ -1,0 +1,310 @@
+{
+  "log": {
+    "version": "1.2",
+    "creator": {
+      "name": "Firefox",
+      "version": "129.0.2"
+    },
+    "browser": {
+      "name": "Firefox",
+      "version": "129.0.2"
+    },
+    "pages": [
+      {
+        "id": "page_1",
+        "pageTimings": {
+          "onContentLoad": -196339,
+          "onLoad": -195182
+        },
+        "startedDateTime": "2024-12-12T21:21:36.692+05:30",
+        "title": "http://127.0.0.1:8000/playground?model=default&rag=aichat-wiki1"
+      }
+    ],
+    "entries": [
+      {
+        "startedDateTime": "2024-12-12T21:21:36.692+05:30",
+        "request": {
+          "bodySize": 49,
+          "method": "POST",
+          "url": "http://127.0.0.1:8000/v1/rags/search",
+          "httpVersion": "HTTP/1.1",
+          "headers": [
+            {
+              "name": "Host",
+              "value": "127.0.0.1:8000"
+            },
+            {
+              "name": "User-Agent",
+              "value": "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:129.0) Gecko/20100101 Firefox/129.0"
+            },
+            {
+              "name": "Accept",
+              "value": "*/*"
+            },
+            {
+              "name": "Accept-Language",
+              "value": "en-US,en;q=0.5"
+            },
+            {
+              "name": "Accept-Encoding",
+              "value": "gzip, deflate, br, zstd"
+            },
+            {
+              "name": "Referer",
+              "value": "http://127.0.0.1:8000/playground?model=default&rag=aichat-wiki1"
+            },
+            {
+              "name": "content-type",
+              "value": "application/json"
+            },
+            {
+              "name": "Content-Length",
+              "value": "49"
+            },
+            {
+              "name": "Origin",
+              "value": "http://127.0.0.1:8000"
+            },
+            {
+              "name": "Connection",
+              "value": "keep-alive"
+            },
+            {
+              "name": "Sec-Fetch-Dest",
+              "value": "empty"
+            },
+            {
+              "name": "Sec-Fetch-Mode",
+              "value": "cors"
+            },
+            {
+              "name": "Sec-Fetch-Site",
+              "value": "same-origin"
+            },
+            {
+              "name": "Priority",
+              "value": "u=0"
+            },
+            {
+              "name": "Pragma",
+              "value": "no-cache"
+            },
+            {
+              "name": "Cache-Control",
+              "value": "no-cache"
+            }
+          ],
+          "cookies": [],
+          "queryString": [],
+          "headersSize": 548,
+          "postData": {
+            "mimeType": "application/json",
+            "params": [],
+            "text": "{\"name\":\"aichat-wiki1\",\"input\":\"what is aichat?\"}"
+          }
+        },
+        "response": {
+          "status": 200,
+          "statusText": "OK",
+          "httpVersion": "HTTP/1.1",
+          "headers": [
+            {
+              "name": "content-type",
+              "value": "application/json; charset=utf-8"
+            },
+            {
+              "name": "access-control-allow-origin",
+              "value": "*"
+            },
+            {
+              "name": "access-control-allow-methods",
+              "value": "GET,POST,PUT,PATCH,DELETE"
+            },
+            {
+              "name": "access-control-allow-headers",
+              "value": "Content-Type,Authorization"
+            },
+            {
+              "name": "content-length",
+              "value": "5339"
+            },
+            {
+              "name": "date",
+              "value": "Thu, 12 Dec 2024 15:51:39 GMT"
+            }
+          ],
+          "cookies": [],
+          "content": {
+            "mimeType": "application/json; charset=utf-8",
+            "size": 5339,
+            "text": "{\"data\":\"Answer the query based on the context while respecting the rules. (user query, some textual context and rules, all inside xml tags)\\n\\n<context>\\n## Shell Assistant\\n\\nSimply input what you want to do in natural language, and aichat will prompt and run the command that achieves your intent.\\n\\n**AIChat is aware of OS and shell you are using, it will provide shell command for specific system you have.**\\n\\n## Shell Integration\\n\\nSimply type `alt+e` to let `aichat` provide intelligent completions directly in your terminal.\\n\\nAIChat offers shell integration scripts for for bash, zsh, PowerShell, fish, and nushell. You can find them on GitHub at https://github.com/sigoden/aichat/tree/main/scripts/shell-integration.\\n\\n## Shell Autocompletion\\n\\nThe shell autocompletion suggests commands, options, and filenames as you type, enabling you to type less, work faster, and avoid typos.\\n\\nAIChat offers shell completion scripts for bash, zsh, PowerShell, fish, and nushell. You can find them on GitHub at https://github.com/sigoden/aichat/tree/main/scripts/completions.\\n\\n## Generate Code\\n\\nBy using the `--code` or `-c` parameter, you can specifically request pure code output.\\n\\n**The `-c/--code` with pipe ensures the extraction of code from Markdown.**\\n\\n## Use Files & Urls\\n\\nThe `-f/--file` can be used to send files to LLMs.\\n\\n```\\n# Use local file\\naichat -f data.txt\\n# Use image file\\naichat -f image.png ocr\\n# Use multi files\\naichat -f file1 -f file2 explain\\n# Use local dirs\\naichat -f dir/ summarize\\n# Use remote URLs\\naichat -f https://example.com/page summarize\\n```\\n\\n## Usage\\n\\n```\\nUsage: aichat [OPTIONS] [TEXT]...\\n\\nArguments:\\n  [TEXT]...  Input text\\n\\nOptions:\\n  -m, --model <MODEL>        Select a LLM model\\n      --prompt <PROMPT>      Use the system prompt\\n  -r, --role <ROLE>          Select a role\\n  -s, --session [<SESSION>]  Start or join a session\\n      --empty-session        Ensure the session is empty\\n      --save-session         Ensure the new conversation is saved to the session\\n  -a, --agent <AGENT>        Start a agent\\n  -R, --rag <RAG>            Start a RAG\\n      --serve [<ADDRESS>]    Serve the LLM API and WebAPP\\n  -e, --execute              Execute commands in natural language\\n  -c, --code                 Output code only\\n  -f, --file <FILE>          Include files with the message\\n  -S, --no-stream            Turn off stream mode\\n      --dry-run              Display the message without sending it\\n      --info                 Display information\\n      --list-models          List all available chat models\\n      --list-roles           List all roles\\n      --list-sessions        List all sessions\\n      --list-agents          List all agents\\n      --list-rags            List all RAGs\\n  -h, --help                 Print help\\n  -V, --version              Print version\\n\\n```\\n\\n## Env file\\n\\nAIChat supports env file ( `<aichat-config-dir>/.env`) for managing environment variables.\\n\\nYou can put all your secret environment variables in the `.env` file.\\n\\n## Run Server\\n\\nAIChat comes with a built-in lightweight http server.\\n\\n```\\n$ aichat --serve\\nChat Completions API: http://127.0.0.1:8000/v1/chat/completions\\nEmbeddings API:       http://127.0.0.1:8000/v1/embeddings\\nLLM Playground:       http://127.0.0.1:8000/playground\\nLLM Arena:            http://127.0.0.1:8000/arena?num=2\\n\\n```\\n\\nChange the listening address:\\n\\n```\\n$ aichat --serve 0.0.0.0\\n$ aichat --serve 8080\\n$ aichat --serve 0.0.0.0:8080\\n\\n```\\n\\n## Examples\\n\\n```\\naichat                                          # Enter REPL\\naichat Tell a joke                              # Generate response\\n\\naichat -e install nvim                          # Execute command\\naichat -c fibonacci in js                       # Generate code\\n\\naichat --serve                                  # Run server\\n\\naichat -m openai:gpt-4o                         # Select LLM\\n\\naichat -r role1                                 # Use role 'role1'\\naichat -s                                       # Begin a temp session\\naichat -s session1                              # Use session 'session1'\\naichat -a agent1                                # Use agent 'agent1'\\naichat -R rag1                                  # Use RAG 'rag1'\\n\\naichat --info                                   # View system info\\naichat -r role1 --info                          # View role info\\naichat -s session1 --info                       # View session info\\naichat -a agent1 --info                         # View agent info\\naichat -R rag1 --info                           # View RAG info\\n\\ncat data.toml | aichat -c to json > data.json   # Pipe Input/Output\\noutput=$(aichat -S $input)                      # Run in the script\\n\\naichat -f a.png -f b.png diff images            # Use files\\n```\\n</context>\\n\\n<rules>\\n- If you don't know, just say so.\\n- If you are not sure, ask for clarification.\\n- Answer in the same language as the user query.\\n- If the context appears unreadable or of poor quality, tell the user then answer as best as you can.\\n- If the answer is not in the context but you think you know the answer, explain that to the user then answer with your own knowledge.\\n- Answer directly and without using xml tags.\\n</rules>\\n\\n<user_query>\\nwhat is aichat?\\n</user_query>\"}"
+          },
+          "redirectURL": "",
+          "headersSize": 272,
+          "bodySize": 5611
+        },
+        "cache": {},
+        "timings": {
+          "blocked": -1,
+          "dns": 13,
+          "connect": 0,
+          "ssl": 0,
+          "send": 0,
+          "wait": 2652,
+          "receive": 0
+        },
+        "time": 2665,
+        "_securityState": "insecure",
+        "serverIPAddress": "127.0.0.1",
+        "connection": "8000",
+        "pageref": "page_1"
+      },
+      {
+        "startedDateTime": "2024-12-12T21:21:39.358+05:30",
+        "request": {
+          "bodySize": 5403,
+          "method": "POST",
+          "url": "http://127.0.0.1:8000/v1/chat/completions",
+          "httpVersion": "HTTP/1.1",
+          "headers": [
+            {
+              "name": "Host",
+              "value": "127.0.0.1:8000"
+            },
+            {
+              "name": "User-Agent",
+              "value": "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:129.0) Gecko/20100101 Firefox/129.0"
+            },
+            {
+              "name": "Accept",
+              "value": "*/*"
+            },
+            {
+              "name": "Accept-Language",
+              "value": "en-US,en;q=0.5"
+            },
+            {
+              "name": "Accept-Encoding",
+              "value": "gzip, deflate, br, zstd"
+            },
+            {
+              "name": "Referer",
+              "value": "http://127.0.0.1:8000/playground?model=default&rag=aichat-wiki1"
+            },
+            {
+              "name": "content-type",
+              "value": "application/json"
+            },
+            {
+              "name": "Content-Length",
+              "value": "5403"
+            },
+            {
+              "name": "Origin",
+              "value": "http://127.0.0.1:8000"
+            },
+            {
+              "name": "Connection",
+              "value": "keep-alive"
+            },
+            {
+              "name": "Sec-Fetch-Dest",
+              "value": "empty"
+            },
+            {
+              "name": "Sec-Fetch-Mode",
+              "value": "cors"
+            },
+            {
+              "name": "Sec-Fetch-Site",
+              "value": "same-origin"
+            },
+            {
+              "name": "Priority",
+              "value": "u=4"
+            },
+            {
+              "name": "Pragma",
+              "value": "no-cache"
+            },
+            {
+              "name": "Cache-Control",
+              "value": "no-cache"
+            }
+          ],
+          "cookies": [],
+          "queryString": [],
+          "headersSize": 555,
+          "postData": {
+            "mimeType": "application/json",
+            "params": [],
+            "text": "{\"model\":\"default\",\"messages\":[{\"role\":\"user\",\"content\":\"Answer the query based on the context while respecting the rules. (user query, some textual context and rules, all inside xml tags)\\n\\n<context>\\n## Shell Assistant\\n\\nSimply input what you want to do in natural language, and aichat will prompt and run the command that achieves your intent.\\n\\n**AIChat is aware of OS and shell you are using, it will provide shell command for specific system you have.**\\n\\n## Shell Integration\\n\\nSimply type `alt+e` to let `aichat` provide intelligent completions directly in your terminal.\\n\\nAIChat offers shell integration scripts for for bash, zsh, PowerShell, fish, and nushell. You can find them on GitHub at https://github.com/sigoden/aichat/tree/main/scripts/shell-integration.\\n\\n## Shell Autocompletion\\n\\nThe shell autocompletion suggests commands, options, and filenames as you type, enabling you to type less, work faster, and avoid typos.\\n\\nAIChat offers shell completion scripts for bash, zsh, PowerShell, fish, and nushell. You can find them on GitHub at https://github.com/sigoden/aichat/tree/main/scripts/completions.\\n\\n## Generate Code\\n\\nBy using the `--code` or `-c` parameter, you can specifically request pure code output.\\n\\n**The `-c/--code` with pipe ensures the extraction of code from Markdown.**\\n\\n## Use Files & Urls\\n\\nThe `-f/--file` can be used to send files to LLMs.\\n\\n```\\n# Use local file\\naichat -f data.txt\\n# Use image file\\naichat -f image.png ocr\\n# Use multi files\\naichat -f file1 -f file2 explain\\n# Use local dirs\\naichat -f dir/ summarize\\n# Use remote URLs\\naichat -f https://example.com/page summarize\\n```\\n\\n## Usage\\n\\n```\\nUsage: aichat [OPTIONS] [TEXT]...\\n\\nArguments:\\n  [TEXT]...  Input text\\n\\nOptions:\\n  -m, --model <MODEL>        Select a LLM model\\n      --prompt <PROMPT>      Use the system prompt\\n  -r, --role <ROLE>          Select a role\\n  -s, --session [<SESSION>]  Start or join a session\\n      --empty-session        Ensure the session is empty\\n      --save-session         Ensure the new conversation is saved to the session\\n  -a, --agent <AGENT>        Start a agent\\n  -R, --rag <RAG>            Start a RAG\\n      --serve [<ADDRESS>]    Serve the LLM API and WebAPP\\n  -e, --execute              Execute commands in natural language\\n  -c, --code                 Output code only\\n  -f, --file <FILE>          Include files with the message\\n  -S, --no-stream            Turn off stream mode\\n      --dry-run              Display the message without sending it\\n      --info                 Display information\\n      --list-models          List all available chat models\\n      --list-roles           List all roles\\n      --list-sessions        List all sessions\\n      --list-agents          List all agents\\n      --list-rags            List all RAGs\\n  -h, --help                 Print help\\n  -V, --version              Print version\\n\\n```\\n\\n## Env file\\n\\nAIChat supports env file ( `<aichat-config-dir>/.env`) for managing environment variables.\\n\\nYou can put all your secret environment variables in the `.env` file.\\n\\n## Run Server\\n\\nAIChat comes with a built-in lightweight http server.\\n\\n```\\n$ aichat --serve\\nChat Completions API: http://127.0.0.1:8000/v1/chat/completions\\nEmbeddings API:       http://127.0.0.1:8000/v1/embeddings\\nLLM Playground:       http://127.0.0.1:8000/playground\\nLLM Arena:            http://127.0.0.1:8000/arena?num=2\\n\\n```\\n\\nChange the listening address:\\n\\n```\\n$ aichat --serve 0.0.0.0\\n$ aichat --serve 8080\\n$ aichat --serve 0.0.0.0:8080\\n\\n```\\n\\n## Examples\\n\\n```\\naichat                                          # Enter REPL\\naichat Tell a joke                              # Generate response\\n\\naichat -e install nvim                          # Execute command\\naichat -c fibonacci in js                       # Generate code\\n\\naichat --serve                                  # Run server\\n\\naichat -m openai:gpt-4o                         # Select LLM\\n\\naichat -r role1                                 # Use role 'role1'\\naichat -s                                       # Begin a temp session\\naichat -s session1                              # Use session 'session1'\\naichat -a agent1                                # Use agent 'agent1'\\naichat -R rag1                                  # Use RAG 'rag1'\\n\\naichat --info                                   # View system info\\naichat -r role1 --info                          # View role info\\naichat -s session1 --info                       # View session info\\naichat -a agent1 --info                         # View agent info\\naichat -R rag1 --info                           # View RAG info\\n\\ncat data.toml | aichat -c to json > data.json   # Pipe Input/Output\\noutput=$(aichat -S $input)                      # Run in the script\\n\\naichat -f a.png -f b.png diff images            # Use files\\n```\\n</context>\\n\\n<rules>\\n- If you don't know, just say so.\\n- If you are not sure, ask for clarification.\\n- Answer in the same language as the user query.\\n- If the context appears unreadable or of poor quality, tell the user then answer as best as you can.\\n- If the answer is not in the context but you think you know the answer, explain that to the user then answer with your own knowledge.\\n- Answer directly and without using xml tags.\\n</rules>\\n\\n<user_query>\\nwhat is aichat?\\n</user_query>\"}],\"stream\":true}"
+          }
+        },
+        "response": {
+          "status": 200,
+          "statusText": "OK",
+          "httpVersion": "HTTP/1.1",
+          "headers": [
+            {
+              "name": "content-type",
+              "value": "text/event-stream"
+            },
+            {
+              "name": "cache-control",
+              "value": "no-cache"
+            },
+            {
+              "name": "connection",
+              "value": "keep-alive"
+            },
+            {
+              "name": "access-control-allow-origin",
+              "value": "*"
+            },
+            {
+              "name": "access-control-allow-methods",
+              "value": "GET,POST,PUT,PATCH,DELETE"
+            },
+            {
+              "name": "access-control-allow-headers",
+              "value": "Content-Type,Authorization"
+            },
+            {
+              "name": "transfer-encoding",
+              "value": "chunked"
+            },
+            {
+              "name": "date",
+              "value": "Thu, 12 Dec 2024 15:51:52 GMT"
+            }
+          ],
+          "cookies": [],
+          "content": {
+            "mimeType": "text/event-stream",
+            "size": 1249,
+            "text": "data: {\"id\":\"chatcmpl-372232305\",\"object\":\"chat.completion.chunk\",\"created\":1734018699,\"model\":\"gemini:gemini-1.5-pro-latest\",\"choices\":[{\"index\":0,\"delta\":{\"content\":\"A\"},\"finish_reason\":null}]}\n\ndata: {\"id\":\"chatcmpl-372232305\",\"object\":\"chat.completion.chunk\",\"created\":1734018699,\"model\":\"gemini:gemini-1.5-pro-latest\",\"choices\":[{\"index\":0,\"delta\":{\"content\":\"ichat is a command-line tool that allows you to interact with large language\"},\"finish_reason\":null}]}\n\ndata: {\"id\":\"chatcmpl-372232305\",\"object\":\"chat.completion.chunk\",\"created\":1734018699,\"model\":\"gemini:gemini-1.5-pro-latest\",\"choices\":[{\"index\":0,\"delta\":{\"content\":\" models (LLMs) using natural language.  It can execute commands, generate\"},\"finish_reason\":null}]}\n\ndata: {\"id\":\"chatcmpl-372232305\",\"object\":\"chat.completion.chunk\",\"created\":1734018699,\"model\":\"gemini:gemini-1.5-pro-latest\",\"choices\":[{\"index\":0,\"delta\":{\"content\":\" code, work with files and URLs, manage sessions, use different roles and agents, and even run a built-in server.\\n\"},\"finish_reason\":null}]}\n\ndata: {\"id\":\"chatcmpl-372232305\",\"object\":\"chat.completion.chunk\",\"created\":1734018699,\"model\":\"gemini:gemini-1.5-pro-latest\",\"choices\":[{\"index\":0,\"delta\":{},\"finish_reason\":\"stop\"}]}\n\ndata: [DONE]\n\n"
+          },
+          "redirectURL": "",
+          "headersSize": 313,
+          "bodySize": 1562
+        },
+        "cache": {},
+        "timings": {
+          "blocked": -1,
+          "dns": 0,
+          "connect": 0,
+          "ssl": 0,
+          "send": 0,
+          "wait": 13276,
+          "receive": 1229
+        },
+        "time": 14505,
+        "_securityState": "insecure",
+        "serverIPAddress": "127.0.0.1",
+        "connection": "8000",
+        "pageref": "page_1"
+      }
+    ]
+  }
+}
