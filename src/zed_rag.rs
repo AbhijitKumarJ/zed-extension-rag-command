@@ -1,9 +1,9 @@
+use serde::Deserialize;
 use zed::{
     http_client::{HttpMethod, HttpRequest},
     serde_json::{self, json},
 };
 use zed_extension_api::{self as zed, http_client::RedirectPolicy, Result};
-use serde::Deserialize;
 
 struct RagExtension;
 
@@ -36,8 +36,9 @@ impl zed::Extension for RagExtension {
         &self,
         command: zed::SlashCommand,
         arguments: Vec<String>,
-        worktree: Option<&zed::Worktree>,
+        _worktree: Option<&zed::Worktree>,
     ) -> Result<zed::SlashCommandOutput> {
+        let _ = _worktree;
         if command.name != "rag" {
             return Err("Invalid command. Expected 'rag'.".into());
         }
@@ -57,7 +58,7 @@ impl zed::Extension for RagExtension {
             headers: vec![("Content-Type".to_string(), "application/json".to_string())],
             body: Some(
                 serde_json::to_vec(&json!({
-                    "name": "deno2",  // Matches the "name" field in the aichat payload
+                    "name": "aichat-wiki1",  // Matches the "name" field in the aichat payload
                     "input": query,  // Matches the "input" field
                 }))
                 .map_err(|err| format!("Failed to serialize search request: {}", err))?,
@@ -86,7 +87,7 @@ impl zed::Extension for RagExtension {
             headers: vec![("Content-Type".to_string(), "application/json".to_string())],
             body: Some(
                 serde_json::to_vec(&json!({
-                    "model": "openai:gpt-4o",
+                    "model": "default",
                     "messages": [
                         { "role": "system", "content": system_content },
                         { "role": "user", "content": query }
@@ -98,12 +99,15 @@ impl zed::Extension for RagExtension {
             redirect_policy: RedirectPolicy::FollowAll,
         };
 
-        let mut stream = zed::http_client::fetch_stream(&completion_request)
+        let stream = zed::http_client::fetch_stream(&completion_request)
             .map_err(|err| format!("Chat completion request failed: {}", err))?;
 
         // Step 3: Process streaming response
         let mut response_text = String::new();
-        while let Some(response_chunk) = stream.next_chunk().map_err(|err| format!("Stream error: {}", err))? {
+        while let Some(response_chunk) = stream
+            .next_chunk()
+            .map_err(|err| format!("Stream error: {}", err))?
+        {
             let response_body = String::from_utf8(response_chunk)
                 .map_err(|err| format!("Failed to parse response chunk: {}", err))?;
 
@@ -118,7 +122,7 @@ impl zed::Extension for RagExtension {
         // Step 4: Return the assistant response
         Ok(zed::SlashCommandOutput {
             text: response_text.trim().to_string(), // Direct assistant response
-            sections: vec![],                      // Optional, add relevant sections if needed
+            sections: vec![],                       // Optional, add relevant sections if needed
         })
     }
 }
